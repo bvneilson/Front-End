@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { axiosWithAuth } from '../axiosWithAuth.js';
 
-const Login = () => {
+const Signup = props => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -16,7 +16,7 @@ const Login = () => {
     })
   }
 
-  const handleLogin = e => {
+  const handleSignup = e => {
     e.preventDefault();
     axiosWithAuth().post('', credentials).then(res => {
       console.log(res);
@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <div className="text-center">
-      <h3>Please use the form to log in!</h3>
+      <h3>Please use the form to sign up!</h3>
       <Form className="action-form">
         <Row form>
           <Col md={{size: 8, offset: 2}}>
@@ -48,11 +48,11 @@ const Login = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleLogin}>Log in</Button>
-        <FormText>Don't have an account? Please, <Link to="/signup"><u>sign up here</u></Link>.</FormText>
+        <Button onClick={handleSignup}>Log in</Button>
+        <FormText>Already have an account? Please, <Link to="/login"><u>log in here</u></Link>.</FormText>
       </Form>
     </div>
   )
 }
 
-export default Login;
+export default Signup;
