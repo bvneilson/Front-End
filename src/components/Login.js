@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  grid: {
-    textAlign: 'center',
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-}));
+import { Link } from 'react-router-dom';
+import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import axios from 'axios';
 
 const Login = () => {
-  const classes = useStyles();
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -33,25 +18,38 @@ const Login = () => {
 
   const handleLogin = e => {
     e.preventDefault();
-
+    axios.post('', credentials).then(res => {
+      console.log(res);
+      //set token to localstorage
+    }).catch(err => {
+      console.error(err);
+    })
   }
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <form className={classes.root} noValidate autoComplete="off">
-          <div>
-            <TextField required id="standard-required" type="text" label="Username" name="username" value={credentials.username} onChange={handleChange} />
-          </div>
-          <div>
-            <TextField required id="standard-required" type="text" label="Password" name="password" value={credentials.password} onChange={handleChange} />
-          </div>
-          <Button variant="contained" color="primary" onClick={handleLogin}>
-            Log In
-          </Button>
-        </form>
-      </Grid>
-    </Grid>
+    <div className="text-center">
+      <h3>Please use the form to log in!</h3>
+      <Form className="action-form">
+        <Row form>
+          <Col md={{size: 8, offset: 2}}>
+            <FormGroup>
+              <Label for="username">Email</Label>
+              <Input type="text" name="username" value={credentials.username} onChange={handleChange} />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={{size: 8, offset: 2}}>
+            <FormGroup>
+              <Label for="examplePassword">Password</Label>
+              <Input type="password" name="password" value={credentials.password} onChange={handleChange} />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Button onClick={handleLogin}>Log in</Button>
+        <FormText>Don't have an account? Please, <Link to="/signup"><u>sign up here</u></Link>.</FormText>
+      </Form>
+    </div>
   )
 }
 
