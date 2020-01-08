@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { axiosWithAuth } from '../axiosWithAuth.js';
+import { connect } from 'react-redux';
+import { signUp } from '../actions';
 
 const Signup = props => {
   const [credentials, setCredentials] = useState({
@@ -18,14 +19,7 @@ const Signup = props => {
 
   const handleSignup = e => {
     e.preventDefault();
-    axiosWithAuth().post('', credentials).then(res => {
-      console.log(res);
-      //set token to localstorage
-      localStorage.setItem('token', res.data.token);
-      this.props.history.push('/');
-    }).catch(err => {
-      console.error(err);
-    })
+    props.signUp(credentials);
   }
 
   return (
@@ -35,7 +29,7 @@ const Signup = props => {
         <Row form>
           <Col md={{size: 8, offset: 2}}>
             <FormGroup>
-              <Label for="username">Email</Label>
+              <Label for="username">Username</Label>
               <Input type="text" name="username" value={credentials.username} onChange={handleChange} />
             </FormGroup>
           </Col>
@@ -48,11 +42,21 @@ const Signup = props => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleSignup}>Log in</Button>
+        <Button onClick={handleSignup}>Sign up</Button>
         <FormText>Already have an account? Please, <Link to="/login"><u>log in here</u></Link>.</FormText>
       </Form>
     </div>
   )
 }
 
-export default Signup;
+const mapStateToProps = state => {
+  //console.log(state);
+  if (!state) {
+    return{};
+  }
+  return {
+    isLoggedIn: state.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps, { signUp })(Signup);
