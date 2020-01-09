@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Collapse, Navbar, NavbarToggler, Nav, NavItem} from 'reactstrap';
+import { withRouter } from 'react-router'
+import {Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink} from 'reactstrap';
 import { connect } from 'react-redux';
 
 
 const Header = props => {
+  console.log(props.username);
   const [isOpen, setIsOpen] = useState(false);
 
   const token = localStorage.getItem('token');
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const handleLogOut = e => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    props.history.push('/login');
+  }
 
   if (!token) {
     return (
@@ -37,7 +45,7 @@ const Header = props => {
       <Collapse isOpen={isOpen} navbar>
       <Nav className="mr-auto" navbar>
         <NavItem>
-          <Link to="/my-jokes" className="nav-link">My Jokes</Link>
+          <Link to={`/jokes/${props.username}`} className="nav-link">My Jokes</Link>
         </NavItem>
         <NavItem>
           <Link to="/new-joke" className="nav-link">New Joke</Link>
@@ -45,7 +53,7 @@ const Header = props => {
       </Nav>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <Link to="/signup" className="nav-link">Log Out</Link>
+            <NavLink href="#" onClick={handleLogOut}>Log Out</NavLink>
           </NavItem>
         </Nav>
       </Collapse>
@@ -59,8 +67,8 @@ const mapStateToProps = state => {
     return{};
   }
   return {
-    isLoggedIn: state.isLoggedIn
+    username: state.username
   }
 }
 
-export default connect(mapStateToProps, {})(Header);
+export default withRouter(connect(mapStateToProps, {})(Header));

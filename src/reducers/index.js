@@ -12,7 +12,7 @@ import { SIGN_UP_START,
   GET_JOKES_BY_USERNAME_FAIL } from '../actions';
 
 const initialState = {
-  username: '',
+  username: localStorage.getItem('username'),
   jokes: [],
   jokesByUsername: [],
   isFetching: false
@@ -30,8 +30,7 @@ export const reducer = (state = initialState, action) => {
       case SIGN_UP_SUCCESS:
         return {
           ...state,
-          isSignedUp: true,
-          isLoggedIn: true,
+          username: action.payload.user.username,
           isFetching: false,
           error: ''
         }
@@ -49,7 +48,7 @@ export const reducer = (state = initialState, action) => {
       case LOG_IN_SUCCESS:
         return {
           ...state,
-          isLoggedIn: true,
+          username: action.payload.user.username,
           isFetching: false,
           error: ''
         }

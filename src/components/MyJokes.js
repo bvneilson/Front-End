@@ -1,34 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getJokesByUsername } from '../actions';
 import JokeCard from './JokeCard.js';
 
 const MyJokes = props => {
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     const { username } = props.match.params;
+    setUsername(username);
 
     props.getJokesByUsername(username);
-  },[props.match.params]);
+  },[]);
 
   if (!props.jokesByUsername) {
     return <h2>Loading jokes...</h2>
   }
 
+  if (username === props.username) {
+    return (
+      <Container>
+        <h2>Your Jokes</h2>
+        <Row>
+          <p>You haven't submitted any jokes yet.</p>
+        </Row>
+      </Container>
+    )
+  }
+
+  if (props.jokesByUsername.length === 0) {
+    return (
+      <Container>
+        <h2>{`Jokes by ${username}`}</h2>
+        <Row>
+          <p>{`${username} hasn't submitted any jokes yet.`}</p>
+        </Row>
+      </Container>
+    )
+  }
+
   return (
-    props.jokesByUsername.map(joke => {
-      //console.log(joke);
-      return (
-        <Container>
-          <Row>
-            {props.jokesByUsername.map((joke, index) => {
-              return <JokeCard joke={joke} key={index} />
-            })}
-          </Row>
-        </Container>
-      )
-    })
+    <Container>
+      <h2>{`Jokes by ${username}`}</h2>
+      <Row>
+        {props.jokesByUsername.map((joke, index) => {
+          return <JokeCard joke={joke} key={index} />
+        })}
+      </Row>
+    </Container>
   )
 }
 
@@ -38,7 +58,8 @@ const mapStateToProps = state => {
   }
 
   return {
-    jokesByUsername: state.jokesByUsername
+    jokesByUsername: state.jokesByUsername,
+    username: state.username
   }
 }
 

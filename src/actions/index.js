@@ -18,9 +18,10 @@ export const signUp = (credentials, history) => dispatch => {
   dispatch({ type: SIGN_UP_START });
   axios.post('https://pt-dad-jokes.herokuapp.com/api/auth/register', credentials).then(res => {
     console.log(res);
-    dispatch({ type: SIGN_UP_SUCCESS, payload: res.data.message })
+    dispatch({ type: SIGN_UP_SUCCESS, payload: res.data })
     //set token to localstorage
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('username', res.data.user.username);
     history.push('/');
   }).catch(err => {
     console.error(err);
@@ -32,9 +33,10 @@ export const logIn = (credentials, history) => dispatch => {
   dispatch({ type: LOG_IN_START });
   axios.post('https://pt-dad-jokes.herokuapp.com/api/auth/login', credentials).then(res => {
     console.log(res);
-    dispatch({ type: LOG_IN_SUCCESS, payload: res.data.message })
+    dispatch({ type: LOG_IN_SUCCESS, payload: res.data })
     //set token to localstorage
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('username', res.data.user.username);
     history.push('/');
   }).catch(err => {
     console.error(err);
