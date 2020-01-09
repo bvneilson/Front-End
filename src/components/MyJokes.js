@@ -6,6 +6,7 @@ import JokeCard from './JokeCard.js';
 
 const MyJokes = props => {
   const [username, setUsername] = useState();
+  const match = (username === props.username) ? true : false;
 
   useEffect(() => {
     const { username } = props.match.params;
@@ -18,23 +19,12 @@ const MyJokes = props => {
     return <h2>Loading jokes...</h2>
   }
 
-  if (username === props.username) {
-    return (
-      <Container>
-        <h2>Your Jokes</h2>
-        <Row>
-          <p>You haven't submitted any jokes yet.</p>
-        </Row>
-      </Container>
-    )
-  }
-
   if (props.jokesByUsername.length === 0) {
     return (
       <Container>
-        <h2>{`Jokes by ${username}`}</h2>
+        <h2>{(match) ? 'Your Jokes' : `Jokes by ${username}`}</h2>
         <Row>
-          <p>{`${username} hasn't submitted any jokes yet.`}</p>
+          <p>{(match) ? 'You haven\'t submitted any jokes yet.' : `${username} hasn't submitted any jokes yet.`}{`${username} hasn't submitted any jokes yet.`}</p>
         </Row>
       </Container>
     )
@@ -42,7 +32,7 @@ const MyJokes = props => {
 
   return (
     <Container>
-      <h2>{`Jokes by ${username}`}</h2>
+      <h2>{(match) ? 'Your Jokes' : `Jokes by ${username}`}</h2>
       <Row>
         {props.jokesByUsername.map((joke, index) => {
           return <JokeCard joke={joke} key={index} />

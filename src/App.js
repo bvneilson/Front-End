@@ -8,6 +8,7 @@ import Signup from './components/Signup.js';
 import MyJokes from './components/MyJokes.js';
 import PrivateRoute from './privateRoute.js';
 import Home from './components/Home.js';
+import NewJoke from './components/NewJoke.js';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/login" render={props => {return <Login {...props} />}} />
       <Route path="/signup" render={props => {return <Signup {...props} />}} />
       <PrivateRoute path="/jokes/:username" component={MyJokes} />
+      <PrivateRoute path="/new-joke" component={NewJoke} />
     </div>
   );
 }

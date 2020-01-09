@@ -5,7 +5,7 @@ import JokeCard from './JokeCard.js';
 import { Container, Row } from 'reactstrap';
 
 const Home = props => {
-  console.log(props.jokes);
+  //console.log(props.jokes);
   useEffect(() => {
     props.getJokes();
   }, [])

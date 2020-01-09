@@ -9,7 +9,10 @@ import { SIGN_UP_START,
   GET_JOKES_FAIL,
   GET_JOKES_BY_USERNAME_START,
   GET_JOKES_BY_USERNAME_SUCCESS,
-  GET_JOKES_BY_USERNAME_FAIL } from '../actions';
+  GET_JOKES_BY_USERNAME_FAIL,
+  CREATE_JOKE_START,
+  CREATE_JOKE_SUCCESS,
+  CREATE_JOKE_FAIL } from '../actions';
 
 const initialState = {
   username: localStorage.getItem('username'),
@@ -30,7 +33,7 @@ export const reducer = (state = initialState, action) => {
       case SIGN_UP_SUCCESS:
         return {
           ...state,
-          username: action.payload.user.username,
+          username: action.payload.created_user.username,
           isFetching: false,
           error: ''
         }
@@ -81,14 +84,31 @@ export const reducer = (state = initialState, action) => {
         isFetching: true,
         error: ''
       }
-      case GET_JOKES_BY_USERNAME_SUCCESS:
-        return {
-          ...state,
-          jokesByUsername: action.payload,
-          isFetching: false,
-          error: ''
-        }
+    case GET_JOKES_BY_USERNAME_SUCCESS:
+      return {
+        ...state,
+        jokesByUsername: action.payload,
+        isFetching: false,
+        error: ''
+      }
     case GET_JOKES_BY_USERNAME_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case CREATE_JOKE_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case CREATE_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: ''
+      }
+    case CREATE_JOKE_FAIL:
       return {
         ...state,
         error: action.payload

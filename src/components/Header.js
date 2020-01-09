@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 
 const Header = props => {
-  console.log(props.username);
+  //console.log(props.username);
   const [isOpen, setIsOpen] = useState(false);
 
   const token = localStorage.getItem('token');
@@ -16,6 +16,7 @@ const Header = props => {
   const handleLogOut = e => {
     e.preventDefault();
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     props.history.push('/login');
   }
 

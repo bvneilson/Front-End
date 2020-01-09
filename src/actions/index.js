@@ -13,15 +13,18 @@ export const GET_JOKES_FAIL = 'GET_JOKES_FAIL';
 export const GET_JOKES_BY_USERNAME_START = 'GET_JOKES_BY_USERNAME_START';
 export const GET_JOKES_BY_USERNAME_SUCCESS = 'GET_JOKES_BY_USERNAME_SUCCESS';
 export const GET_JOKES_BY_USERNAME_FAIL = 'GET_JOKES_BY_USERNAME_FAIL';
+export const CREATE_JOKE_START = 'CREATE_JOKE_START';
+export const CREATE_JOKE_SUCCESS = 'CREATE_JOKE_SUCCESS';
+export const CREATE_JOKE_FAIL = 'CREATE_JOKE_FAIL';
 
 export const signUp = (credentials, history) => dispatch => {
   dispatch({ type: SIGN_UP_START });
   axios.post('https://pt-dad-jokes.herokuapp.com/api/auth/register', credentials).then(res => {
-    console.log(res);
+    //console.log(res);
     dispatch({ type: SIGN_UP_SUCCESS, payload: res.data })
     //set token to localstorage
     localStorage.setItem('token', res.data.token);
-    localStorage.setItem('username', res.data.user.username);
+    localStorage.setItem('username', res.data.created_user.username);
     history.push('/');
   }).catch(err => {
     console.error(err);
@@ -32,7 +35,7 @@ export const signUp = (credentials, history) => dispatch => {
 export const logIn = (credentials, history) => dispatch => {
   dispatch({ type: LOG_IN_START });
   axios.post('https://pt-dad-jokes.herokuapp.com/api/auth/login', credentials).then(res => {
-    console.log(res);
+    //console.log(res);
     dispatch({ type: LOG_IN_SUCCESS, payload: res.data })
     //set token to localstorage
     localStorage.setItem('token', res.data.token);
@@ -47,7 +50,7 @@ export const logIn = (credentials, history) => dispatch => {
 export const getJokes = () => dispatch => {
   dispatch({ type: GET_JOKES_START });
   axios.get('https://pt-dad-jokes.herokuapp.com/api/jokes').then(res => {
-    console.log(res);
+    //console.log(res);
     dispatch({ type: GET_JOKES_SUCCESS, payload: res.data })
   }).catch(err => {
     console.error(err);
@@ -58,10 +61,22 @@ export const getJokes = () => dispatch => {
 export const getJokesByUsername = (username) => dispatch => {
   dispatch({ type: GET_JOKES_BY_USERNAME_START });
   axiosWithAuth().get(`https://pt-dad-jokes.herokuapp.com/api/jokes/${username}`).then(res => {
-    console.log(res);
+    //console.log(res);
     dispatch({ type: GET_JOKES_BY_USERNAME_SUCCESS, payload: res.data })
   }).catch(err => {
     console.error(err);
     dispatch({ type: GET_JOKES_BY_USERNAME_FAIL, payload: err })
+  })
+}
+
+export const createJoke = (newJoke, history) => dispatch => {
+  dispatch({ type: CREATE_JOKE_START });
+  axiosWithAuth().post('https://pt-dad-jokes.herokuapp.com/api/jokes/create', newJoke).then(res => {
+    //console.log(res);
+    dispatch({ type: CREATE_JOKE_SUCCESS, payload: res.data })
+    history.push('/');
+  }).catch(err => {
+    console.error(err);
+    dispatch({ type: CREATE_JOKE_FAIL, payload: err })
   })
 }

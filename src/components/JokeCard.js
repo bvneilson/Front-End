@@ -18,7 +18,7 @@ const JokeCard = props => {
       <Card body className="text-center joke-card">
         <CardTitle>{joke}</CardTitle>
         <CardText className={visible}><i>{punchline}</i></CardText>
-        <Button onClick={togglePunchline} className={((punchline === null) ? 'd-none' : 'punchline-button')} size="sm">{punch}</Button>
+        <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm">{punch}</Button>
         <CardText>Submitted by: <strong><Link to={`/jokes/${author_username}`}>{author_username}</Link></strong></CardText>
       </Card>
     </Col>
