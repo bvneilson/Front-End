@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Header.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
+import MyJokes from './components/MyJokes.js';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Header />
       <Route path="/login" render={props => {return <Login {...props} />}} />
       <Route path="/signup" render={props => {return <Signup {...props} />}} />
+      <PrivateRoute path='/my-jokes' component={MyJokes} />
     </div>
   );
 }

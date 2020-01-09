@@ -7,10 +7,13 @@ export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
 export const LOG_IN_START = 'LOG_IN_START';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAIL = 'LOG_IN_FAIL';
+export const GET_JOKES_START = 'GET_JOKES_START';
+export const GET_JOKES_SUCCESS = 'GET_JOKES_SUCCESS';
+export const GET_JOKES_FAIL = 'GET_JOKES_FAIL';
 
 export const signUp = (credentials) => dispatch => {
   dispatch({ type: SIGN_UP_START });
-  axios.post('http://dadjokes9.herokuapp.com/auth/register', credentials).then(res => {
+  axios.post('https://dadjokes9.herokuapp.com/auth/register', credentials).then(res => {
     console.log(res);
     dispatch({ type: SIGN_UP_SUCCESS, payload: res.data.message })
     //set token to localstorage
@@ -24,7 +27,7 @@ export const signUp = (credentials) => dispatch => {
 
 export const logIn = (credentials) => dispatch => {
   dispatch({ type: LOG_IN_START });
-  axiosWithAuth().post('http://dadjokes9.herokuapp.com/auth/login', credentials).then(res => {
+  axios.post('https://dadjokes9.herokuapp.com/auth/login', credentials).then(res => {
     console.log(res);
     dispatch({ type: LOG_IN_SUCCESS, payload: res.data.message })
     //set token to localstorage
@@ -33,5 +36,16 @@ export const logIn = (credentials) => dispatch => {
   }).catch(err => {
     console.error(err);
     dispatch({ type: LOG_IN_FAIL, payload: err })
+  })
+}
+
+export const getJokes = () => dispatch => {
+  dispatch({ type: GET_JOKES_START });
+  axios.get('https://dadjokes9.herokuapp.com/jokes/all').then(res => {
+    console.log(res);
+    dispatch({ type: GET_JOKES_SUCCESS, payload: res.data })
+  }).catch(err => {
+    console.error(err);
+    dispatch({ type: GET_JOKES_FAIL, payload: err })
   })
 }

@@ -15,11 +15,6 @@ const Header = props => {
         <Link to="/" className="navbar-brand">Dad Jokes</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <Link to="/jokes" className="nav-link">Joke List</Link>
-            </NavItem>
-          </Nav>
           <Nav className="ml-auto" navbar>
             <NavItem>
               <Link to="/login" className="nav-link">Log In</Link>
@@ -40,7 +35,7 @@ const Header = props => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <Link to="/login" className="nav-link">Jokes</Link>
+            <Link to="/my-jokes" className="nav-link">My Jokes</Link>
           </NavItem>
           <NavItem>
             <Link to="/signup" className="nav-link">Log Out</Link>
