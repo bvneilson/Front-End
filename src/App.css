@@ -37,3 +37,11 @@ a {
   margin: 20px 20%;
   padding: 20px 5px;
 }
+
+.punchline-button {
+  width: 50%;
+  margin: 0px auto 20px auto;
+}
+.joke-card {
+  margin: 20px 0;
+}

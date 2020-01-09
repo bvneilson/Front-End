@@ -6,12 +6,15 @@ import { SIGN_UP_START,
   LOG_IN_FAIL,
   GET_JOKES_START,
   GET_JOKES_SUCCESS,
-  GET_JOKES_FAIL } from '../actions';
+  GET_JOKES_FAIL,
+  GET_JOKES_BY_USERNAME_START,
+  GET_JOKES_BY_USERNAME_SUCCESS,
+  GET_JOKES_BY_USERNAME_FAIL } from '../actions';
 
 const initialState = {
-  isLoggedIn: true,
-  isSignedUp: false,
+  username: '',
   jokes: [],
+  jokesByUsername: [],
   isFetching: false
 }
 
@@ -28,6 +31,7 @@ export const reducer = (state = initialState, action) => {
         return {
           ...state,
           isSignedUp: true,
+          isLoggedIn: true,
           isFetching: false,
           error: ''
         }
@@ -54,24 +58,43 @@ export const reducer = (state = initialState, action) => {
         ...state,
         error: action.payload
       }
-      case GET_JOKES_START:
+    case GET_JOKES_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+      case GET_JOKES_SUCCESS:
         return {
           ...state,
-          isFetching: true,
+          jokes: action.payload,
+          isFetching: false,
           error: ''
         }
-        case GET_JOKES_SUCCESS:
-          return {
-            ...state,
-            jokes: action.payload,
-            isFetching: false,
-            error: ''
-          }
-      case GET_JOKES_FAIL:
+    case GET_JOKES_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case GET_JOKES_BY_USERNAME_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+      case GET_JOKES_BY_USERNAME_SUCCESS:
         return {
           ...state,
-          error: action.payload
+          jokesByUsername: action.payload,
+          isFetching: false,
+          error: ''
         }
+    case GET_JOKES_BY_USERNAME_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      }
+
     default:
       return state;
   }

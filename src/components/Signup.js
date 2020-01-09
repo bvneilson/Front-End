@@ -19,7 +19,7 @@ const Signup = props => {
 
   const handleSignup = e => {
     e.preventDefault();
-    props.signUp(credentials);
+    props.signUp(credentials, props.history);
   }
 
   return (

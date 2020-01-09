@@ -19,7 +19,7 @@ const Login = props => {
 
   const handleLogin = e => {
     e.preventDefault();
-    props.logIn(credentials);
+    props.logIn(credentials, props.history);
   }
 
   return (

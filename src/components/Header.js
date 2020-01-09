@@ -7,9 +7,11 @@ import { connect } from 'react-redux';
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const token = localStorage.getItem('token');
+
   const toggle = () => setIsOpen(!isOpen);
 
-  if (!props.isLoggedIn) {
+  if (!token) {
     return (
       <Navbar color="light" light expand="md">
         <Link to="/" className="navbar-brand">Dad Jokes</Link>
@@ -33,10 +35,15 @@ const Header = props => {
       <Link to="/" className="navbar-brand">Dad Jokes</Link>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
+      <Nav className="mr-auto" navbar>
+        <NavItem>
+          <Link to="/my-jokes" className="nav-link">My Jokes</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/new-joke" className="nav-link">New Joke</Link>
+        </NavItem>
+      </Nav>
         <Nav className="ml-auto" navbar>
-          <NavItem>
-            <Link to="/my-jokes" className="nav-link">My Jokes</Link>
-          </NavItem>
           <NavItem>
             <Link to="/signup" className="nav-link">Log Out</Link>
           </NavItem>
