@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { connect } from 'react-redux';
-import { logIn } from '../actions';
+import { signUp } from '../actions';
 
-const Login = props => {
+const Signup = props => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -17,14 +17,14 @@ const Login = props => {
     })
   }
 
-  const handleLogin = e => {
+  const handleSignup = e => {
     e.preventDefault();
-    props.logIn(credentials);
+    props.signUp(credentials);
   }
 
   return (
     <div className="text-center">
-      <h3>Please use the form to log in!</h3>
+      <h3>Please use the form to sign up!</h3>
       <Form className="action-form">
         <Row form>
           <Col md={{size: 8, offset: 2}}>
@@ -42,8 +42,8 @@ const Login = props => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleLogin}>Log in</Button>
-        <FormText>Don't have an account? Please, <Link to="/signup"><u>sign up here</u></Link>.</FormText>
+        <Button onClick={handleSignup}>Sign up</Button>
+        <FormText>Already have an account? Please, <Link to="/login"><u>log in here</u></Link>.</FormText>
       </Form>
     </div>
   )
@@ -55,8 +55,8 @@ const mapStateToProps = state => {
     return{};
   }
   return {
-    isSignedUp: state.isSignedUp
+    isLoggedIn: state.isLoggedIn
   }
 }
 
-export default connect(mapStateToProps, { logIn })(Login);
+export default connect(mapStateToProps, { signUp })(Signup);
