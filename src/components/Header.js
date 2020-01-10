@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 import {Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink} from 'reactstrap';
 import { connect } from 'react-redux';
 

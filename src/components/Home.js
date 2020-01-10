@@ -10,7 +10,7 @@ const Home = props => {
     props.getJokes();
   }, [])
 
-  if (!props.jokes) {
+  if (!props.jokes || props.jokes === []) {
     return <h3>Loading jokes...</h3>
   }
 

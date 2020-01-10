@@ -12,7 +12,13 @@ import { SIGN_UP_START,
   GET_JOKES_BY_USERNAME_FAIL,
   CREATE_JOKE_START,
   CREATE_JOKE_SUCCESS,
-  CREATE_JOKE_FAIL } from '../actions';
+  CREATE_JOKE_FAIL,
+  EDIT_JOKE_START,
+  EDIT_JOKE_SUCCESS,
+  EDIT_JOKE_FAIL,
+  DELETE_JOKE_START,
+  DELETE_JOKE_SUCCESS,
+  DELETE_JOKE_FAIL } from '../actions';
 
 const initialState = {
   username: localStorage.getItem('username'),
@@ -109,6 +115,40 @@ export const reducer = (state = initialState, action) => {
         error: ''
       }
     case CREATE_JOKE_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case EDIT_JOKE_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case EDIT_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: ''
+      }
+    case EDIT_JOKE_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case DELETE_JOKE_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      }
+    case DELETE_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: ''
+      }
+    case DELETE_JOKE_FAIL:
       return {
         ...state,
         error: action.payload

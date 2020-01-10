@@ -16,6 +16,12 @@ export const GET_JOKES_BY_USERNAME_FAIL = 'GET_JOKES_BY_USERNAME_FAIL';
 export const CREATE_JOKE_START = 'CREATE_JOKE_START';
 export const CREATE_JOKE_SUCCESS = 'CREATE_JOKE_SUCCESS';
 export const CREATE_JOKE_FAIL = 'CREATE_JOKE_FAIL';
+export const EDIT_JOKE_START = 'EDIT_JOKE_START';
+export const EDIT_JOKE_SUCCESS = 'EDIT_JOKE_SUCCESS';
+export const EDIT_JOKE_FAIL = 'EDIT_JOKE_FAIL';
+export const DELETE_JOKE_START = 'DELETE_JOKE_START';
+export const DELETE_JOKE_SUCCESS = 'DELETE_JOKE_SUCCESS';
+export const DELETE_JOKE_FAIL = 'DELETE_JOKE_FAIL';
 
 export const signUp = (credentials, history) => dispatch => {
   dispatch({ type: SIGN_UP_START });
@@ -78,5 +84,29 @@ export const createJoke = (newJoke, history) => dispatch => {
   }).catch(err => {
     console.error(err);
     dispatch({ type: CREATE_JOKE_FAIL, payload: err })
+  })
+}
+
+export const editJoke = (id, editedJoke, history) => dispatch => {
+  dispatch({ type: EDIT_JOKE_START });
+  axiosWithAuth().put(`https://pt-dad-jokes.herokuapp.com/api/jokes/${id}`, editedJoke).then(res => {
+    console.log(res);
+    dispatch({ type: EDIT_JOKE_SUCCESS, payload: res.data })
+    history.goBack();
+  }).catch(err => {
+    console.error(err);
+    dispatch({ type: EDIT_JOKE_FAIL, payload: err })
+  })
+}
+
+export const deleteJoke = (id, history, username) => dispatch => {
+  dispatch({ type: DELETE_JOKE_START });
+  axiosWithAuth().delete(`https://pt-dad-jokes.herokuapp.com/api/jokes/${id}`).then(res => {
+    console.log(res);
+    dispatch({ type: DELETE_JOKE_SUCCESS, payload: res.data })
+    history.push(`/jokes/${username}`);
+  }).catch(err => {
+    console.error(err);
+    dispatch({ type: DELETE_JOKE_FAIL, payload: err })
   })
 }
