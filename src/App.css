@@ -1,5 +1,8 @@
 .App {
 }
+body {
+  background-color: #17a2b8;
+}
 
 .App-logo {
   height: 40vmin;
@@ -34,14 +37,41 @@ a {
 
 .action-form {
   border: 1px solid #E8E8E8;
-  margin: 20px 20%;
-  padding: 20px 5px;
+  margin: 60px 20%;
+  padding: 60px 5px;
+  background-color: #fff;
+  border-radius: 7px;
 }
 
 .punchline-button {
   width: 50%;
-  margin: 0px auto 20px auto;
+  margin: 0px auto 40px auto;
 }
-.joke-card {
+.public-joke-card {
   margin: 20px 0;
+  padding: 40px 20px;
+}
+.card-header {
+  text-align: right;
+}
+.icon {
+  padding: 0 5px;
+}
+h2, h3 {
+  padding-top: 60px;
+}
+@media (min-width: 576px) {
+  .container, .container-sm {
+      max-width: 620px;
+  }
+}
+@media (min-width: 992px) {
+  .container, .container-sm {
+      max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container, .container-sm {
+      max-width: 1260px;
+  }
 }

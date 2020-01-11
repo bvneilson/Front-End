@@ -6,41 +6,46 @@ import { deleteJoke } from '../actions';
 import { withRouter } from 'react-router';
 
 const JokeCard = props => {
-  
+
   const {id, joke, punchline, author_username} = props.joke;
-  const [visible, setVisible] = useState('d-none');
+  const [visible, setVisible] = useState('invisible');
   const [punch, setPunch] = useState('View Punchline')
 
   const togglePunchline = () => {
-    setVisible((visible === 'd-none') ? '' : 'd-none' );
+    setVisible((visible === 'invisible') ? '' : 'invisible' );
     setPunch((punch === 'View Punchline') ? 'Hide Punchline' : 'View Punchline');
   }
 
   if (props.edit) {
     return (
-      <Col sm={4}>
-      <Card>
-        <CardHeader className="pl-auto">
-          <Link to={`/edit-joke/${id}`} size="sm">Edit</Link>
-          <Button onClick={() => props.deleteJoke(id, props.history, props.username)} size="sm">Delete</Button>
+      <Col xl={3} lg={4} md={6} sm={6}>
+      <Card className="text-center joke-card">
+        <CardHeader>
+          <CardText>
+            <Link to={`/edit-joke/${id}`} title="Edit Joke">
+              <i className="icon ion-md-create"></i>
+            </Link>
+            <Link to="" title="Delete Joke">
+              <i className="icon ion-md-trash" onClick={() => props.deleteJoke(id, props.history, props.username)}></i>
+            </Link>
+          </CardText>
         </CardHeader>
         <CardBody>
           <CardTitle>{joke}</CardTitle>
           <CardText className={visible}><i>{punchline}</i></CardText>
-          <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm">{punch}</Button>
+          <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'invisible' : 'punchline-button')} size="sm" color="info">{punch}</Button>
         </CardBody>
-        <CardFooter>Submitted by: <strong><Link to={`/jokes/${author_username}`}>{author_username}</Link></strong></CardFooter>
       </Card>
       </Col>
     )
   }
 
   return (
-    <Col sm={4}>
-      <Card body className="text-center joke-card">
+    <Col xl={3} lg={4} md={6} sm={6}>
+      <Card body className="text-center public-joke-card">
         <CardTitle>{joke}</CardTitle>
         <CardText className={visible}><i>{punchline}</i></CardText>
-        <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm">{punch}</Button>
+        <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'invisible' : 'punchline-button')} size="sm" color="info">{punch}</Button>
         <CardText>Submitted by: <strong><Link to={`/jokes/${author_username}`}>{author_username}</Link></strong></CardText>
       </Card>
     </Col>
