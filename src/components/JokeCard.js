@@ -19,7 +19,7 @@ const JokeCard = props => {
   if (props.edit) {
     return (
       <Col sm={12} className="align-self-center">
-      <Card className="text-center joke-card">
+      <Card className="text-center joke-card editable-joke-card">
         <CardHeader>
           <CardText>
             <Link to={`/edit-joke/${id}`} title="Edit Joke">

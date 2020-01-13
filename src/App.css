@@ -52,6 +52,10 @@ a {
   padding: 10px 20px;
   max-width: 600px;
 }
+.editable-joke-card {
+  margin: 20px auto;
+  max-width: 600px;
+}
 .card-header {
   text-align: right;
 }
