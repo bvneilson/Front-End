@@ -22,7 +22,7 @@ const MyJokes = props => {
   if (props.jokesByUsername.length === 0) {
     return (
       <Container>
-        <h2>{(match) ? 'Your Jokes' : `Jokes by ${username}`}</h2>
+        <h2>{(match) ? 'My Jokes' : `Jokes by ${username}`}</h2>
         <Row>
           <p>{(match) ? 'You haven\'t submitted any jokes yet.' : `${username} hasn't submitted any jokes yet.`}</p>
         </Row>
@@ -32,7 +32,7 @@ const MyJokes = props => {
 
   return (
     <Container>
-      <h2>{(match) ? 'Your Jokes' : `Jokes by ${username}`}</h2>
+      <h2>{(match) ? 'My Jokes' : `Jokes by ${username}`}</h2>
       <Row>
         {props.jokesByUsername.map((joke, index) => {
           return <JokeCard joke={joke} key={index} edit={match} username={username} />

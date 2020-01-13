@@ -18,7 +18,7 @@ const JokeCard = props => {
 
   if (props.edit) {
     return (
-      <Col xl={3} lg={4} md={6} sm={6}>
+      <Col sm={12} className="align-self-center">
       <Card className="text-center joke-card">
         <CardHeader>
           <CardText>
@@ -33,7 +33,7 @@ const JokeCard = props => {
         <CardBody>
           <CardTitle>{joke}</CardTitle>
           <CardText className={visible}><i>{punchline}</i></CardText>
-          <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'invisible' : 'punchline-button')} size="sm" color="info">{punch}</Button>
+          <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm" color="info">{punch}</Button>
         </CardBody>
       </Card>
       </Col>
@@ -41,11 +41,11 @@ const JokeCard = props => {
   }
 
   return (
-    <Col xl={3} lg={4} md={6} sm={6}>
+    <Col sm={12} className="align-self-center">
       <Card body className="text-center public-joke-card">
         <CardTitle>{joke}</CardTitle>
         <CardText className={visible}><i>{punchline}</i></CardText>
-        <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'invisible' : 'punchline-button')} size="sm" color="info">{punch}</Button>
+        <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm" color="info">{punch}</Button>
         <CardText>Submitted by: <strong><Link to={`/jokes/${author_username}`}>{author_username}</Link></strong></CardText>
       </Card>
     </Col>

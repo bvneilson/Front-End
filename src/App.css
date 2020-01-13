@@ -45,11 +45,12 @@ a {
 
 .punchline-button {
   width: 50%;
-  margin: 0px auto 40px auto;
+  margin: 0px auto 10px auto;
 }
 .public-joke-card {
-  margin: 20px 0;
-  padding: 40px 20px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  max-width: 600px;
 }
 .card-header {
   text-align: right;
@@ -62,6 +63,9 @@ h2, h3 {
 }
 .form-text {
   padding-top: 20px;
+}
+.load-more-button {
+  margin: 0 auto 50px;
 }
 @media (min-width: 576px) {
   .container, .container-sm {

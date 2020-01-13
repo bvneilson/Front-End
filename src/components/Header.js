@@ -17,7 +17,16 @@ const Header = props => {
     e.preventDefault();
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    if (isOpen) {
+      setIsOpen(false);
+    }
     props.history.push('/login');
+  }
+
+  const closeIfOpen = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
   }
 
   if (!token) {
@@ -28,10 +37,10 @@ const Header = props => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <Link to="/login" className="nav-link">Log In</Link>
+              <Link to="/login" className="nav-link" onClick={closeIfOpen}>Log In</Link>
             </NavItem>
             <NavItem>
-              <Link to="/signup" className="nav-link">Sign Up</Link>
+              <Link to="/signup" className="nav-link" onClick={closeIfOpen}>Sign Up</Link>
             </NavItem>
           </Nav>
         </Collapse>
@@ -41,15 +50,15 @@ const Header = props => {
 
   return (
     <Navbar color="light" light expand="md">
-      <Link to="/" className="navbar-brand">Dad Jokes</Link>
+      <Link to="/" className="navbar-brand" onClick={closeIfOpen}>Dad Jokes</Link>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
       <Nav className="mr-auto" navbar>
         <NavItem>
-          <Link to={`/jokes/${props.username}`} className="nav-link">My Jokes</Link>
+          <Link to={`/jokes/${props.username}`} className="nav-link" onClick={closeIfOpen}>My Jokes</Link>
         </NavItem>
         <NavItem>
-          <Link to="/new-joke" className="nav-link">New Joke</Link>
+          <Link to="/new-joke" className="nav-link" onClick={closeIfOpen}>New Joke</Link>
         </NavItem>
       </Nav>
         <Nav className="ml-auto" navbar>
