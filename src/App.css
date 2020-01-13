@@ -60,6 +60,9 @@ a {
 h2, h3 {
   padding-top: 60px;
 }
+.form-text {
+  padding-top: 20px;
+}
 @media (min-width: 576px) {
   .container, .container-sm {
       max-width: 620px;
