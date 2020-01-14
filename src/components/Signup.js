@@ -19,12 +19,11 @@ const Signup = props => {
 
   const handleSignup = e => {
     e.preventDefault();
-    props.signUp(credentials);
+    props.signUp(credentials, props.history);
   }
 
   return (
     <div className="text-center">
-      <h3>Please use the form to sign up!</h3>
       <Form className="action-form">
         <Row form>
           <Col md={{size: 8, offset: 2}}>
@@ -42,7 +41,7 @@ const Signup = props => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleSignup}>Sign up</Button>
+        <Button className="btn-info" onClick={handleSignup}>Sign up</Button>
         <FormText>Already have an account? Please, <Link to="/login"><u>log in here</u></Link>.</FormText>
       </Form>
     </div>

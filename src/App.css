@@ -1,5 +1,8 @@
 .App {
 }
+body {
+  background-color: #c8c8c8;
+}
 
 .App-logo {
   height: 40vmin;
@@ -34,6 +37,79 @@ a {
 
 .action-form {
   border: 1px solid #E8E8E8;
-  margin: 20px 20%;
-  padding: 20px 5px;
+  margin: 60px 30%;
+  padding: 60px 5px;
+  background-color: #fff;
+  border-radius: 7px;
+}
+
+.punchline-button {
+  width: 50%;
+  margin: 0px auto 30px auto;
+}
+.public-joke-card {
+  margin: 20px auto;
+  padding: 10px 20px;
+  max-width: 600px;
+}
+.editable-joke-card {
+  margin: 20px auto;
+  max-width: 600px;
+}
+.card-header {
+  text-align: right;
+}
+.icon {
+  padding: 0 5px;
+}
+h2, h3 {
+  padding-top: 60px;
+}
+.form-text {
+  padding-top: 20px;
+}
+.load-more-button {
+  margin: 0 auto 50px;
+}
+.posted-by, .posted-by a {
+  color: #b8b8b8;
+  font-size: 12px;
+}
+.card h3 {
+  padding-top: 0;
+}
+.card {
+  border: 1px solid #888888;
+}
+.card-text i {
+  font-size: 20px;
+}
+.joke {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.container h2 {
+  text-align: center;
+}
+textarea {
+  height: auto;
+}
+button {
+  background-color: #c8c8c8;
+}
+@media (min-width: 576px) {
+  .container, .container-sm {
+      max-width: 620px;
+  }
+}
+@media (min-width: 992px) {
+  .container, .container-sm {
+      max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container, .container-sm {
+      max-width: 1260px;
+  }
 }
