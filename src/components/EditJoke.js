@@ -10,28 +10,18 @@ const EditJoke = props => {
 
   const original = props.jokes.find(joke => joke.id === parseInt(props.match.params.id))
 
-  const [editedJoke, setEditedJoke] = useState({
-    joke: '',
-    punchline: '',
-    author_username: ''
-  });
+  const [editedJoke, setEditedJoke] = useState(original);
 
   if (!props.jokes || props.jokes === []) {
     return <h3>Loading...</h3>
   }
 
   const handleChange = e => {
-    if (editedJoke.joke === '' || editedJoke.punchline === '' || editedJoke.author_username === '') {
-      setEditedJoke({
-        ...original,
-        [e.target.name]: e.target.value
-      })
-    } else {
+
       setEditedJoke({
         ...editedJoke,
         [e.target.name]: e.target.value
       })
-    }
   }
 
   const handleEditJoke = e => {
@@ -49,7 +39,7 @@ const EditJoke = props => {
           <Col md={{size: 8, offset: 2}}>
             <FormGroup>
               <Label for="joke">Joke</Label>
-              <Input type="text" name="joke" value={(original && editedJoke.joke === '') ? original.joke : editedJoke.joke} onChange={handleChange} />
+              <Input type="text" name="joke" value={editedJoke.joke} onChange={handleChange} />
             </FormGroup>
           </Col>
         </Row>
@@ -57,7 +47,7 @@ const EditJoke = props => {
           <Col md={{size: 8, offset: 2}}>
             <FormGroup>
               <Label for="punchline">Punchline (optional)</Label>
-              <Input type="text" name="punchline" value={(original && editedJoke.punchline === '') ? original.punchline : editedJoke.punchline} onChange={handleChange} />
+              <Input type="text" name="punchline" value={editedJoke.punchline} onChange={handleChange} />
             </FormGroup>
           </Col>
         </Row>
