@@ -24,7 +24,6 @@ const Login = props => {
 
   return (
     <div className="text-center">
-      <h3>Please use the form to log in!</h3>
       <Form className="action-form">
         <Row form>
           <Col md={{size: 8, offset: 2}}>
@@ -42,7 +41,7 @@ const Login = props => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleLogin}>Log in</Button>
+        <Button className="btn-info" onClick={handleLogin}>Log in</Button>
         <FormText>Don't have an account? Please, <Link to="/signup"><u>sign up here</u></Link>.</FormText>
       </Form>
     </div>

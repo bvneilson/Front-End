@@ -9,10 +9,12 @@ const EditJoke = props => {
   }, [])
 
   const original = props.jokes.find(joke => joke.id === parseInt(props.match.params.id))
+  //console.log('Original - ' + original)
 
   const [editedJoke, setEditedJoke] = useState(original);
+  //console.log('Edited - ' + editedJoke)
 
-  if (!props.jokes || props.jokes === []) {
+  if (!props.jokes || props.jokes === [] || !original) {
     return <h3>Loading...</h3>
   }
 
@@ -33,13 +35,13 @@ const EditJoke = props => {
 
   return (
     <div className="text-center">
-      <h3>Fill out the form to edit a joke!</h3>
+      <h2>Edit Joke</h2>
       <Form className="action-form">
         <Row form>
           <Col md={{size: 8, offset: 2}}>
             <FormGroup>
               <Label for="joke">Joke</Label>
-              <Input type="text" name="joke" value={editedJoke.joke} onChange={handleChange} />
+              <Input type="textarea" name="joke" value={editedJoke.joke} onChange={handleChange} />
             </FormGroup>
           </Col>
         </Row>
@@ -51,7 +53,7 @@ const EditJoke = props => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleEditJoke}>Submit Joke</Button>
+        <Button className="btn-info" onClick={handleEditJoke}>Save Changes</Button>
       </Form>
     </div>
   )

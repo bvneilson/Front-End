@@ -31,7 +31,7 @@ const JokeCard = props => {
           </CardText>
         </CardHeader>
         <CardBody>
-          <CardTitle>{joke}</CardTitle>
+          <CardText className="joke">{joke}</CardText>
           <CardText className={visible}><i>{punchline}</i></CardText>
           <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm" color="info">{punch}</Button>
         </CardBody>
@@ -43,10 +43,10 @@ const JokeCard = props => {
   return (
     <Col sm={12} className="align-self-center">
       <Card body className="text-center public-joke-card">
-        <CardTitle>{joke}</CardTitle>
+        <CardTitle className="posted-by">Posted by <Link to={`/jokes/${author_username}`}>{author_username}</Link></CardTitle>
+        <CardText className="joke">{joke}</CardText>
         <CardText className={visible}><i>{punchline}</i></CardText>
         <Button onClick={togglePunchline} className={((punchline === null || punchline === '') ? 'd-none' : 'punchline-button')} size="sm" color="info">{punch}</Button>
-        <CardText>Submitted by: <strong><Link to={`/jokes/${author_username}`}>{author_username}</Link></strong></CardText>
       </Card>
     </Col>
   )

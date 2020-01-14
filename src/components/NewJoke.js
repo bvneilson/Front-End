@@ -32,7 +32,7 @@ const NewJoke = props => {
           <Col md={{size: 8, offset: 2}}>
             <FormGroup>
               <Label for="joke">Joke</Label>
-              <Input type="text" name="joke" value={newJoke.joke} onChange={handleChange} />
+              <Input type="textarea" name="joke" value={newJoke.joke} onChange={handleChange} />
             </FormGroup>
           </Col>
         </Row>
@@ -44,7 +44,7 @@ const NewJoke = props => {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={handleCreateJoke}>Submit Joke</Button>
+        <Button className="btn-info" onClick={handleCreateJoke}>Submit Joke</Button>
       </Form>
     </div>
   )
